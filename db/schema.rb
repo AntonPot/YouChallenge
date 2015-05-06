@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20150505231156) do
     t.integer  "proposer_id"
     t.integer  "victim_id"
     t.string   "title"
-    t.string   "desription"
-    t.datetime "redpond_by"
+    t.string   "description"
+    t.datetime "respond_by"
     t.datetime "complete_by"
     t.boolean  "accepted"
     t.boolean  "completed"
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 20150505231156) do
     t.string   "username"
     t.string   "password"
     t.string   "email"
-    t.string   "firstname"
-    t.string   "lastname"
+    t.string   "first_name"
+    t.string   "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

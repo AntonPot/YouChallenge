@@ -5,7 +5,7 @@ class CreateChallenges < ActiveRecord::Migration
       t.integer   :victim_id
       t.string    :title
       t.string    :description
-      t.datetime  :redpond_by
+      t.datetime  :respond_by
       t.datetime  :complete_by
       t.boolean   :accepted
       t.boolean   :completed
