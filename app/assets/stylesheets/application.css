@@ -25,6 +25,15 @@
 	text-align: center;
 }
 
+.challenge {
+	background-color: orange;
+}
+
+.new_comment {
+	background-color: white;
+}
+
+
 /** {
 	background-color: red;
 }*/

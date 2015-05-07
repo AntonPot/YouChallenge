@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
     resources :challenges do 
       resources :comments 
+      resources :supporters
       # resources
     end
     

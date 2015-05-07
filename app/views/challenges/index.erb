@@ -42,7 +42,16 @@
 
 	<div class="supporters border">
 
-	<p><a href="#">Support</a></p>
+		<p><form action="/challenges/<%=challenge.id%>/supporters" method="post">
+			<input type="submit" value="Support this challenge!">
+		</form> </p>
+
+	<b>Supporters</b>
+	<ul>
+		<% challenge.supporters.each do |supp| %>
+		<li><%= User.find(supp.user_id).name %></li>
+		<% end %>
+	</ul>
 
 	</div>
 
