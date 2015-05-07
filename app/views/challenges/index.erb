@@ -1,1 +1,29 @@
-<h1>hello</h1>
+<h1>Create Challenge</h1>
+
+<%= form_for :challenge, url: user_challenges_path do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<h1>All Challenges:</h1>
+
+<% @challenges.each do |challenge| %>
+	<h3><%= challenge.title %></h3>
+	<p><%= challenge.description %></p>
+	<ul>
+		<li><b>Proposer: </b><%= User.find(challenge.proposer_id).username %></li>
+		<li><b>Victim: </b><%= User.find(challenge.victim_id).username %></li>
+		<li><b>Respond By:</b><%= challenge.respond_by %></li>
+	</ul>
+<% end %>
