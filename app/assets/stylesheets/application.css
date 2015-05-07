@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+.border {
+	/*border-color: black;*/
+	border-width: 3px;
+	border-style: solid;
+	/*bord*/
+}
+
+.center {
+	text-align: center;
+}
+
+/** {
+	background-color: red;
+}*/

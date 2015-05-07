@@ -21,7 +21,11 @@ num_of_users.times do
 	User.create(username:   user_name, 
               email:      email, 
               first_name: first_name, 
-              last_name:  last_name
+              last_name:  last_name,
+
+              provider: "facebook",
+              uid: "123",
+              name: first_name + " " + last_name
              )
 end
 

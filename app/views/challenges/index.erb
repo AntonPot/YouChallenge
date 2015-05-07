@@ -1,4 +1,10 @@
-<h1>Create Challenge</h1>
+<div class="center">
+
+<div class="border">
+
+<h1>youChallenge</h1>
+
+<h2>Create Challenge</h2>
 
 <%= form_for :challenge, url: challenges_path do |f| %>
   <p>
@@ -17,11 +23,52 @@
   </p>
 <% end %>
 
-<h1>All Challenges:</h1>
+</div>
+
+<div class="border">
+
+
+<h2>All Challenges</h2>
+
+
 
 <% @challenges.each do |challenge| %>
+
+<div class="challenge border">
+
 	<h3><%= challenge.title %></h3>
 	<p><%= challenge.description %></p>
-	<ul>
-	</ul>
+	<p> Posted By: <%= User.find(challenge.proposer_id).name %></p>
+
+	<div class="supporters border">
+
+	<p><a href="#">Support</a></p>
+
+	</div>
+
+	<div class="comments-list border">
+
+		<% challenge.comments.each do |comment| %>
+			<p><%= comment.text %></p>
+			<p><b><%= User.find(comment.user_id).name %></b></p>
+		<% end %>
+		
+
+	</div>
+
+	<div class="new-comment border">
+	<%= form_for [challenge, challenge.comments.build], url: challenge_comments_path(challenge) do |f| %>
+		<%= f.label "New COMMENT" %><br>
+		<%= f.text_area :text %><br>
+		<%= f.submit %>
+
+	<% end %>
+	</div>
+
+</div>
+
 <% end %>
+
+
+
+</div>
