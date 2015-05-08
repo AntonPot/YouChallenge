@@ -12,4 +12,44 @@
  *
  *= require_tree .
  *= require_self
+ *= require normalize
+ *= require skeleton
  */
+
+.border {
+	/*border-color: black;*/
+	border-width: 3px;
+	border-style: solid;
+	/*bord*/
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.center {
+	text-align: center;
+}
+
+.challenge {
+/*	background-color: orange;
+*/}
+
+.new_comment {
+/*	background-color: white;
+*/}
+
+.container {
+	width: 500px;
+}
+
+.send_challenge {
+	padding-left: 20px;
+}
+
+.submit-btn {
+	text-color: white;
+	/*padding-right: 100px;*/
+}
+
+/** {
+	background-color: red;
+}*/

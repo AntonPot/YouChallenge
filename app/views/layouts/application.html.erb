@@ -1,23 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>YouChallenge</title>
+  <title>youChallenge</title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/simplex/bootstrap.min.css">
+
+
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<div id="user-widget">
-  <% if current_user %>
-    Welcome <strong><%= current_user.name %></strong>!
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  <% else %>
-    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-  <% end %>
+<div class="jumbotron center">
+  <h1><strong>youChallenge</strong></h1>
+  <p>challenge your friends!</p>
+  <p><a class="btn btn-primary btn-lg">Learn more</a></p>
 </div>
 
-<%= yield %>
+<div class="row">
+
+  <div class="one column">
+  </div>
+
+  <div class="two columns center">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <% if current_user %>
+          <h3 class="panel-title">You</h3>
+        <% else %>
+          <h3 class="panel-title">Login</h3>
+        <% end %>
+      </div>
+      <div class="panel-body">
+          <% if current_user %>
+            Welcome <strong><%= current_user.name %></strong>!<br>
+            <img src="<%=current_user.image%>"><hr>
+                
+                Proposed Challenges<br><span class="badge">14</span><hr>
+                
+                Challenges to You<br><span class="badge">2</span><hr>
+                
+                Completed Challenges<br><span class="badge">1</span><br><br>
+
+                <div class="panel-footer"><%= link_to "Sign out", signout_path, id: "sign_out" %></div>
+          <% else %>
+            <%= link_to "Sign in with Facebook to play", "/auth/facebook", id: "sign_in" %>
+          <% end %>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="eight columns">
+   <%= yield %>
+  </div>
+
+  <div class="one columns">
+  </div>
+
+</div>
 
 </body>
 </html>

@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  
+    resources :challenges do 
+      resources :comments 
+      resources :supporters
+      # resources
+    end
+    
+  # end
 
-  resources :challenges
 
   # You can have the root of your site routed with "root"
   root 'challenges#index'

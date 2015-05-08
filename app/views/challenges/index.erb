@@ -1,1 +1,84 @@
-<h1>hello</h1>
+
+
+<div class="border">
+
+<legend>Create Challenge</legend>
+
+<%= form_for :challenge, url: challenges_path, :html =>{:class => 'form-horizontal'} do |f| %>
+
+	<p>
+    <%= f.text_area :description, :class =>'u-full-width', :placeholder => 'I challenge @Kailash to do 100 pushups!' %>
+  </p>
+<div class="row">
+  <div class="eight columns send_challenge"> 
+  	Send Challenge To:   <%= collection_select(:challenge, :victim, User.all, :id, :name, promt: false) %>
+  </div>
+  <div class="four columns">
+    <%= f.submit 'submit', :class => 'btn btn-primary btn-lg submit-btn' %>
+  </div>
+</div>
+<% end %>
+
+</div>
+
+<br>
+
+
+<% @challenges.reverse.each do |challenge| %>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Challenge</h3>
+  </div>
+  <div class="panel-body">
+    
+
+
+<div class="challenge">
+
+	<!-- <h3><%= challenge.title %></h3> -->
+	<h3><%= challenge.description %></h3>
+	<p> Posted By: <%= User.find(challenge.proposer_id).name %></p>
+
+	<div class="supporters border">
+
+		<p><form action="/challenges/<%=challenge.id%>/supporters" method="post">
+			<input type="submit" value="Support this challenge!">
+		</form> </p>
+
+	<b>Supporters</b>
+	<ul>
+		<% challenge.supporters.each do |supp| %>
+		<li><%= User.find(supp.user_id).name %></li>
+		<% end %>
+	</ul>
+
+	</div>
+
+	<div class="comments-list border">
+
+		<% challenge.comments.each do |comment| %>
+			<p><%= comment.text %></p>
+			<p>Posted by: <b><%= User.find(comment.user_id).name %></b></p>
+		<% end %>
+		
+
+	</div>
+
+	<div class="new-comment border">
+	<%= form_for [challenge, challenge.comments.build], url: challenge_comments_path(challenge) do |f| %>
+		<%= f.label "New COMMENT" %><br>
+		<%= f.text_area :text %><br>
+		<%= f.submit %>
+
+	<% end %>
+	</div>
+
+</div>
+
+  </div>
+</div>
+
+<% end %>
+
+
