@@ -2,7 +2,7 @@
 
 <div class="border">
 
-<h2>Create Challenge</h2>
+<legend>Create Challenge</legend>
 
 <%= form_for :challenge, url: challenges_path, :html =>{:class => 'form-horizontal'} do |f| %>
 
@@ -21,16 +21,20 @@
 
 </div>
 
-<div class="border">
-
-
-<h2>All Challenges</h2>
-
+<br>
 
 
 <% @challenges.reverse.each do |challenge| %>
 
-<div class="challenge border">
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Challenge</h3>
+  </div>
+  <div class="panel-body">
+    
+
+
+<div class="challenge">
 
 	<!-- <h3><%= challenge.title %></h3> -->
 	<h3><%= challenge.description %></h3>
@@ -70,6 +74,9 @@
 	<% end %>
 	</div>
 
+</div>
+
+  </div>
 </div>
 
 <% end %>

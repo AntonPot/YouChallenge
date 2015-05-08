@@ -25,12 +25,34 @@
   </div>
 
   <div class="two columns center">
-    <% if current_user %>
-      Welcome <strong><%= current_user.name %></strong>!
-      <%= link_to "Sign out", signout_path, id: "sign_out" %>
-    <% else %>
-      <%= link_to "Sign in with Facebook to play", "/auth/facebook", id: "sign_in" %>
-    <% end %>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <% if current_user %>
+          <h3 class="panel-title">You</h3>
+        <% else %>
+          <h3 class="panel-title">Login</h3>
+        <% end %>
+      </div>
+      <div class="panel-body">
+          <% if current_user %>
+            Welcome <strong><%= current_user.name %></strong>!<br>
+            <img src="<%=current_user.image%>"><hr>
+                
+                Proposed Challenges<br><span class="badge">14</span><hr>
+                
+                Challenges to You<br><span class="badge">2</span><hr>
+                
+                Completed Challenges<br><span class="badge">1</span><br><br>
+
+                <div class="panel-footer"><%= link_to "Sign out", signout_path, id: "sign_out" %></div>
+          <% else %>
+            <%= link_to "Sign in with Facebook to play", "/auth/facebook", id: "sign_in" %>
+          <% end %>
+      </div>
+    </div>
+
+
   </div>
 
   <div class="eight columns">
