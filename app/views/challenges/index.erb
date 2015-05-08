@@ -11,7 +11,7 @@
   </p>
 <div class="row">
   <div class="eight columns send_challenge"> 
-  	Send Challenge To:   <%= collection_select(:challenge, :victim, User.all, :id, :name, promt: false) %>
+  	Send Challenge To:   <%= collection_select(:challenge, :victim, User.all, :id, :name, prompt: true) %>
   </div>
   <div class="four columns">
     <%= f.submit 'submit', :class => 'btn btn-primary btn-lg submit-btn' %>
@@ -37,21 +37,19 @@
 <div class="challenge">
 
 	<!-- <h3><%= challenge.title %></h3> -->
-	<h3><%= challenge.description %></h3>
+	<h2><%= challenge.description %></h2>
 	<p> Posted By: <%= User.find(challenge.proposer_id).name %></p>
 
 	<div class="supporters border">
 
 		<p><form action="/challenges/<%=challenge.id%>/supporters" method="post">
 			<input type="submit" value="Support this challenge!">
-		</form> </p>
-
-	<b>Supporters</b>
-	<ul>
-		<% challenge.supporters.each do |supp| %>
-		<li><%= User.find(supp.user_id).name %></li>
+			<b>Supporters:</b>
+			<% challenge.supporters.each do |supp| %>
+		<%= User.find(supp.user_id).name %>,
 		<% end %>
-	</ul>
+		</form> 
+	</p>
 
 	</div>
 
