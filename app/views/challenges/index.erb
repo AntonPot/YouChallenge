@@ -1,26 +1,22 @@
-<div class="center">
+
 
 <div class="border">
 
-<h1>youChallenge</h1>
-
 <h2>Create Challenge</h2>
 
-<%= form_for :challenge, url: challenges_path do |f| %>
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+<%= form_for :challenge, url: challenges_path, :html =>{:class => 'form-horizontal'} do |f| %>
+
+	<p>
+    <%= f.text_area :description, :class =>'u-full-width', :placeholder => 'I challenge @Kailash to do 100 pushups!' %>
   </p>
- 
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-    <% p params %>
-  </p>
+<div class="row">
+  <div class="eight columns send_challenge"> 
+  	Send Challenge To:   <%= collection_select(:challenge, :victim, User.all, :id, :name, promt: false) %>
+  </div>
+  <div class="four columns">
+    <%= f.submit 'submit', :class => 'btn btn-primary btn-lg submit-btn' %>
+  </div>
+</div>
 <% end %>
 
 </div>
@@ -32,12 +28,12 @@
 
 
 
-<% @challenges.each do |challenge| %>
+<% @challenges.reverse.each do |challenge| %>
 
 <div class="challenge border">
 
-	<h3><%= challenge.title %></h3>
-	<p><%= challenge.description %></p>
+	<!-- <h3><%= challenge.title %></h3> -->
+	<h3><%= challenge.description %></h3>
 	<p> Posted By: <%= User.find(challenge.proposer_id).name %></p>
 
 	<div class="supporters border">
@@ -59,7 +55,7 @@
 
 		<% challenge.comments.each do |comment| %>
 			<p><%= comment.text %></p>
-			<p><b><%= User.find(comment.user_id).name %></b></p>
+			<p>Posted by: <b><%= User.find(comment.user_id).name %></b></p>
 		<% end %>
 		
 
@@ -79,5 +75,3 @@
 <% end %>
 
 
-
-</div>

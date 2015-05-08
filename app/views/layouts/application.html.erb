@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>YouChallenge</title>
+  <title>youChallenge</title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/simplex/bootstrap.min.css">
+
+
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<div id="user-widget">
-  <% if current_user %>
-    Welcome <strong><%= current_user.name %></strong>!
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  <% else %>
-    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-  <% end %>
+<div class="jumbotron center">
+  <h1><strong>youChallenge</strong></h1>
+  <p>challenge your friends!</p>
+  <p><a class="btn btn-primary btn-lg">Learn more</a></p>
 </div>
 
-<%= yield %>
+<div class="row">
+
+  <div class="one column">
+  </div>
+
+  <div class="two columns center">
+    <% if current_user %>
+      Welcome <strong><%= current_user.name %></strong>!
+      <%= link_to "Sign out", signout_path, id: "sign_out" %>
+    <% else %>
+      <%= link_to "Sign in with Facebook to play", "/auth/facebook", id: "sign_in" %>
+    <% end %>
+  </div>
+
+  <div class="eight columns">
+   <%= yield %>
+  </div>
+
+  <div class="one columns">
+  </div>
+
+</div>
 
 </body>
 </html>
