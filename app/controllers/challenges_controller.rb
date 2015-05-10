@@ -20,5 +20,34 @@ class ChallengesController < ApplicationController
 												  	victim_id: params["challenge"]["victim"])
 		redirect_to :root
 	end
+
+	def accept
+		chal = Challenge.find(params["id"])
+		chal.status = "Accepted"
+		chal.save!
+		redirect_to :root
+	end
+
+	def reject
+		chal = Challenge.find(params["id"])
+		chal.status = "Rejected"
+		chal.save!
+		redirect_to :root
+	end
+
+	def complete
+		chal = Challenge.find(params["id"])
+		chal.status = "Completed"
+		chal.save!
+		redirect_to :root
+	end
+
+	def fail
+		chal = Challenge.find(params["id"])
+		chal.status = "Failed"
+		chal.save!
+		redirect_to :root
+	end
+
 	
 end

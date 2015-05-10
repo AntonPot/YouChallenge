@@ -14,6 +14,14 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'challenges#index'
 
+  get '/challenges/:id/accept', to: 'challenges#accept'
+  get '/challenges/:id/reject', to: 'challenges#reject'
+  get '/challenges/:id/complete', to: 'challenges#complete'
+  get '/challenges/:id/fail', to: 'challenges#fail'
+
+
+
+
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]

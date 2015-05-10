@@ -1,6 +1,6 @@
 
-
-<div class="border">
+<% if current_user %>
+<div class="panel panel-default">
 
 <legend>Create Challenge</legend>
 
@@ -21,15 +21,49 @@
 
 </div>
 
-<br>
+<% end %>
 
+<div class="panel panel-default">
+  <div class="panel-heading">Filter Challenges</div>
+  <div class="panel-body center">
+    <a href="#" class="btn btn-default">All</a>
+    <a href="#" class="btn btn-info">Open</a>
+		<a href="#" class="btn btn-primary">Accepted</a>
+		<a href="#" class="btn btn-danger">Rejected</a>
+		<a href="#" class="btn btn-success">Completed</a>
+		<a href="#" class="btn btn-warning">Failed</a>
+  </div>
+</div>
 
 <% @challenges.reverse.each do |challenge| %>
 
+<% if challenge.status == "not accepted" %>
 <div class="panel panel-info">
   <div class="panel-heading">
-    <h3 class="panel-title">Challenge</h3>
+    <h3 class="panel-title">Open Challenge</h3>
   </div>
+<% elsif challenge.status == "Accepted" %>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Accepted Challenge</h3>
+  </div>
+<% elsif challenge.status == "Rejected" %>
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title">Rejected Challenge</h3>
+  </div>
+<% elsif challenge.status == "Completed" %>
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Completed Challenge</h3>
+  </div>
+<% elsif challenge.status == "Failed" %>
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">Failed Challenge</h3>
+  </div>
+<% end %>
+
   <div class="panel-body">
     
 
@@ -39,21 +73,60 @@
 	<!-- <h3><%= challenge.title %></h3> -->
 	<h2><%= challenge.description %></h2>
 	<p> Posted By: <%= User.find(challenge.proposer_id).name %></p>
+	<% if challenge.victim_id %>
+	<p> Challenge For: <%= User.find(challenge.victim_id).name %></p>
+	<% end %>
 
-	<div class="supporters border">
+<div class= "panel panel-default">
+	<p> Challenge Status: <%= challenge.status %></p>
 
-		<p><form action="/challenges/<%=challenge.id%>/supporters" method="post">
+	<% if challenge.victim_id && current_user == User.find(challenge.victim_id) %>
+
+		<% if challenge.status == "not accepted" %>
+
+			<p>This is a Challenge for you! Do You Accept?</p>
+			<div class="btn-group btn-group-justified">
+		  		<a href="/challenges/<%=challenge.id%>/accept" class="btn btn-success">Accept</a>
+		  		<a href="/challenges/<%=challenge.id%>/reject" class="btn btn-primary">Decline</a>
+			</div>
+			
+		<% elsif challenge.status == "Accepted" %>
+
+			<p>You've Accepted this challenge! Have you completed it? </p>
+			<div class="btn-group btn-group-justified">
+		  		<a href="/challenges/<%=challenge.id%>/complete" class="btn btn-success">I did it!</a>
+		  		<a href="/challenges/<%=challenge.id%>/failed" class="btn btn-primary">I couldn't do it</a>
+			</div>
+
+		<% end %>
+
+	<% elsif current_user && challenge.victim_id == nil && challenge.status == "not accepted" %>
+
+			<p>This is an open challenge! Do you want to take this on?</p>
+			<div class="btn-group btn-group-justified">
+		  		<a href="/challenges/<%=challenge.id%>/accept" class="btn btn-success">Accept</a>
+		  		<a href="/challenges/<%=challenge.id%>/reject" class="btn btn-primary">Decline</a>
+			</div>
+
+	<% end %>
+</div>
+
+	<div class="supporters panel panel-default">
+
+		<form action="/challenges/<%=challenge.id%>/supporters" method="post">
+			<% if current_user %>
 			<input type="submit" value="Support this challenge!">
-			<b>Supporters:</b>
+			<% end %>
+		</form> 
+			<b><%= challenge.supporters.count %> Supporters:</b>
 			<% challenge.supporters.each do |supp| %>
 		<%= User.find(supp.user_id).name %>,
 		<% end %>
-		</form> 
-	</p>
+	
 
 	</div>
 
-	<div class="comments-list border">
+	<div class="comments-list panel panel-default">
 
 		<% challenge.comments.each do |comment| %>
 			<p><%= comment.text %></p>
@@ -62,15 +135,16 @@
 		
 
 	</div>
-
-	<div class="new-comment border">
+	<% if current_user %>
+	<div class="new-comment panel panel-default">
 	<%= form_for [challenge, challenge.comments.build], url: challenge_comments_path(challenge) do |f| %>
 		<%= f.label "New COMMENT" %><br>
-		<%= f.text_area :text %><br>
+		<%= f.text_area :text, :class => 'u-full-width' %><br>
 		<%= f.submit %>
-
 	<% end %>
 	</div>
+
+	<% end %>
 
 </div>
 
