@@ -72,6 +72,9 @@
 
 	<!-- <h3><%= challenge.title %></h3> -->
 	<h2><%= challenge.description %></h2>
+
+<div class="rows">
+	<div class="one-half column">
 	<p> Posted By: <%= User.find(challenge.proposer_id).name %></p>
 	<% if challenge.victim_id %>
 	<p> Challenge For: <%= User.find(challenge.victim_id).name %></p>
@@ -90,7 +93,7 @@
 		  		<a href="/challenges/<%=challenge.id%>/reject" class="btn btn-primary">Decline</a>
 			</div>
 			
-		<% elsif challenge.status == "Accepted" %>
+		<% elsif challenge.status == "Accepted six columns" %>
 
 			<p>You've Accepted this challenge! Have you completed it? </p>
 			<div class="btn-group btn-group-justified">
@@ -111,7 +114,7 @@
 	<% end %>
 </div>
 
-	<div class="supporters panel panel-default">
+	<div class="supporters panel panel-default one-half column">
 
 		<form action="/challenges/<%=challenge.id%>/supporters" method="post">
 			<% if current_user %>
@@ -125,6 +128,7 @@
 	
 
 	</div>
+</div>
 
 	<div class="comments-list panel panel-default">
 

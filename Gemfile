@@ -26,7 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'faker'
 
 gem 'hirb'
-
+gem 'filterrific'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
