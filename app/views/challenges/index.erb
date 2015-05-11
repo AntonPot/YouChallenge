@@ -42,6 +42,7 @@
   <div class="panel-heading">
     <h3 class="panel-title">Open Challenge</h3>
   </div>
+
 <% elsif challenge.status == "Accepted" %>
 <div class="panel panel-primary">
   <div class="panel-heading">
@@ -74,7 +75,7 @@
 	<h2><%= challenge.description %></h2>
 
 <div class="rows">
-	<div class="one-half column">
+	
 	<p> Posted By: <%= User.find(challenge.proposer_id).name %></p>
 	<% if challenge.victim_id %>
 	<p> Challenge For: <%= User.find(challenge.victim_id).name %></p>
@@ -112,9 +113,9 @@
 			</div>
 
 	<% end %>
-</div>
 
-	<div class="supporters panel panel-default one-half column">
+
+	<div class="supporters panel panel-default">
 
 		<form action="/challenges/<%=challenge.id%>/supporters" method="post">
 			<% if current_user %>
@@ -128,7 +129,7 @@
 	
 
 	</div>
-</div>
+
 
 	<div class="comments-list panel panel-default">
 
@@ -153,6 +154,8 @@
 </div>
 
   </div>
+</div>
+</div>
 </div>
 
 <% end %>
